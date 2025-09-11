@@ -23,15 +23,19 @@ function HomeComponent() {
           <h2>Talksy-Video Call</h2>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div
+          className="rightNav"
+          style={{ display: "flex", alignItems: "center" }}
+        >
           <IconButton
             onClick={() => {
               navigate("/history");
             }}
           >
             <RestoreIcon />
+            <p> History</p>
           </IconButton>
-          <p>History</p>
+          {/* <p>History</p> */}
 
           <Button
             onClick={() => {
@@ -50,7 +54,9 @@ function HomeComponent() {
         </div>
         <div className="rightPanel">
           <div>
-            <h2>Providing Quality Video Call Just Like Quality Education</h2>
+            <h2>
+              Face-to-face from anywhere — bringing hearts closer across miles!
+            </h2>
 
             <div style={{ display: "flex", gap: "10px" }}>
               <TextField

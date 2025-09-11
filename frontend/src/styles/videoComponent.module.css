@@ -1,4 +1,4 @@
-.meetVideoContainer {
+ .meetVideoContainer {
     position: relative;
     height: 100vh;
     background: rgb(45, 20, 55);
@@ -22,7 +22,61 @@
 
 .buttonContainers svg {
     font-size: 2.5rem;
+} 
+/*  */
+/* lobby stlying */
+.lobbyContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  background: linear-gradient(135deg, #f9f9ff, #eef3ff);
+  padding: 20px;
+  border-radius: 12px;
+  
 }
+
+.lobbyContainer h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.lobbyForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  background: white;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(160, 17, 195, 0.15);
+}
+
+.lobbyForm button {
+  margin-top: 10px;
+  padding: 10px 28px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+/* Video preview */
+.lobbyVideoPreview {
+  margin-top: 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.lobbyVideoPreview video {
+  width: 280px;
+  height: auto;
+  border-radius: 12px;
+  background: black;
+} 
+
 
 .conferenceView { 
 
@@ -59,3 +113,4 @@
     position: absolute;
     bottom: 0;
 }
+ 
