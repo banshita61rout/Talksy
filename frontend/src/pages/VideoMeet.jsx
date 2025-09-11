@@ -24,21 +24,41 @@ const peerConfigConnections = {
 export default function VideoMeetComponent() {
   var socketRef = useRef();
   let socketIdRef = useRef();
+
   let localVideoref = useRef();
+
   let [videoAvailable, setVideoAvailable] = useState(true);
+
   let [audioAvailable, setAudioAvailable] = useState(true);
+
   let [video, setVideo] = useState([]);
+
   let [audio, setAudio] = useState();
+
   let [screen, setScreen] = useState();
+
   let [showModal, setModal] = useState(true);
+
   let [screenAvailable, setScreenAvailable] = useState();
+
   let [messages, setMessages] = useState([]);
+
   let [message, setMessage] = useState("");
+
   let [newMessages, setNewMessages] = useState(3);
+
   let [askForUsername, setAskForUsername] = useState(true);
+
   let [username, setUsername] = useState("");
+
   const videoRef = useRef([]);
+
   let [videos, setVideos] = useState([]);
+
+  // TODO
+  // if(isChrome() === false) {
+
+  // }
 
   useEffect(() => {
     console.log("HELLO");
@@ -310,7 +330,7 @@ export default function VideoMeetComponent() {
           connections[socketListId] = new RTCPeerConnection(
             peerConfigConnections
           );
-          // Wait for  ice candidate
+          // Wait for their ice candidate
           connections[socketListId].onicecandidate = function (event) {
             if (event.candidate != null) {
               socketRef.current.emit(
@@ -321,7 +341,7 @@ export default function VideoMeetComponent() {
             }
           };
 
-          // Wait for  video stream
+          // Wait for their video stream
           connections[socketListId].onaddstream = (event) => {
             console.log("BEFORE:", videoRef.current);
             console.log("FINDING ID: ", socketListId);
@@ -560,7 +580,7 @@ export default function VideoMeetComponent() {
               <></>
             )}
 
-            <Badge badgeContent={newMessages} max={999} color="secondary">
+            <Badge badgeContent={newMessages} max={999} color="orange">
               <IconButton
                 onClick={() => setModal(!showModal)}
                 style={{ color: "white" }}
