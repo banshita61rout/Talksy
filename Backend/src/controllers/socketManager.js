@@ -7,7 +7,7 @@ let timeOnline = {};
 export const connectToSocket = (server) => {
     const io = new Server(server, {
         cors: {
-            origin: ["https://your-app.netlify.app", "http://localhost:5173"],
+            origin: ["talksy-frontend.netlify.app", "http://localhost:5173"],
             methods: ["GET", "POST"],
             allowedHeaders: ["*"],
             credentials: true
