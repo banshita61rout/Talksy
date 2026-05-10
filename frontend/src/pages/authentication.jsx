@@ -1,172 +1,192 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
-import { Snackbar } from "@mui/material";
-
-// TODO remove, this demo shouldn't need to reset the theme.
-
-const defaultTheme = createTheme();
+import { useNavigate } from "react-router-dom";
+import "./auth.css";
 
 export default function Authentication() {
-  const [username, setUsername] = React.useState();
-  const [password, setPassword] = React.useState();
-  const [name, setName] = React.useState();
-  const [error, setError] = React.useState();
-  const [message, setMessage] = React.useState();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [error, setError] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [formState, setFormState] = useState(0); // 0=login, 1=register
 
-  const [formState, setFormState] = React.useState(0);
+  const { handleregister, handleLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  const [open, setOpen] = React.useState(false);
+  const switchTab = (tab) => {
+    setFormState(tab);
+    setError("");
+    setSuccessMsg("");
+  };
 
-  const { handleregister, handleLogin } = React.useContext(AuthContext);
+  const handleAuth = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccessMsg("");
+    setLoading(true);
 
-  let handleAuth = async () => {
     try {
       if (formState === 0) {
-        let result = await handleLogin(username, password);
-      }
-      if (formState === 1) {
-        let result = await handleregister(name, username, password);
-        console.log(result);
+        // LOGIN — AuthContext navigates to /home on success
+        await handleLogin(username, password);
+      } else {
+        // REGISTER
+        const result = await handleregister(name, username, password);
+        setSuccessMsg(result + " — please sign in.");
+        // Reset form and switch to login tab
+        setName("");
         setUsername("");
-        setMessage(result);
-        setOpen(true);
-        setError("");
-        setFormState(0);
         setPassword("");
+        setFormState(0);
       }
     } catch (err) {
-      console.log(err);
-      let message = err.response.data.message;
-      setError(message);
+      const msg =
+        err?.response?.data?.message || "Something went wrong. Try again.";
+      setError(msg);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ height: "100vh" }}>
-        <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          sx={{
-            backgroundImage: `url("/signin.jpg")`,
-            backgroundRepeat: "no-repeat",
+    <div className="auth-root">
+      {/* Left panel */}
+      <div className="auth-left">
+        <div className="auth-brand" onClick={() => navigate("/")}>
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="8" fill="#0ea5e9" />
+            <path d="M7 10h14M7 14h10M7 18h12" stroke="white" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="21" cy="18" r="3" fill="white" />
+          </svg>
+          <span>Talksy</span>
+        </div>
+        <div className="auth-left-content">
+          <h2>Conversations<br />that matter.</h2>
+          <p>Video calls, screen sharing, live chat — everything you need in one place.</p>
+          <div className="auth-features">
+            <div className="auth-feat">
+              <span className="auth-feat-icon">🔒</span>
+              <span>Secure & private calls</span>
+            </div>
+            <div className="auth-feat">
+              <span className="auth-feat-icon">⚡</span>
+              <span>Instant room creation</span>
+            </div>
+            <div className="auth-feat">
+              <span className="auth-feat-icon">📋</span>
+              <span>Meeting history saved</span>
+            </div>
+          </div>
+        </div>
+        <div className="auth-left-dots">
+          {[...Array(20)].map((_, i) => <div key={i} className="dot" />)}
+        </div>
+      </div>
 
-            backgroundColor: (t) =>
-              t.palette.mode === "light"
-                ? t.palette.grey[50]
-                : t.palette.grey[900],
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            // minHeight: "100vh",
-            width: "40%",
-          }}
-        />
-        <Grid item xs={12} sm={8} md={4} component={Paper} elevation={6} square>
-          <Box
-            sx={{
-              my: 8,
-              mx: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
+      {/* Right panel — form */}
+      <div className="auth-right">
+        <div className="auth-card">
+          <h1 className="auth-card-title">
+            {formState === 0 ? "Welcome back" : "Create account"}
+          </h1>
+          <p className="auth-card-sub">
+            {formState === 0
+              ? "Sign in to your Talksy account"
+              : "Join Talksy and start calling"}
+          </p>
 
-            <div>
-              <Button
-                variant={formState === 0 ? "contained" : ""}
-                onClick={() => {
-                  setFormState(0);
-                }}
-              >
-                Login
-              </Button>
-              <Button
-                variant={formState === 1 ? "contained" : ""}
-                onClick={() => {
-                  setFormState(1);
-                }}
-              >
-                Register
-              </Button>
+          {/* Tabs */}
+          <div className="auth-tabs">
+            <button
+              className={`auth-tab ${formState === 0 ? "active" : ""}`}
+              onClick={() => switchTab(0)}
+              type="button"
+            >
+              Sign in
+            </button>
+            <button
+              className={`auth-tab ${formState === 1 ? "active" : ""}`}
+              onClick={() => switchTab(1)}
+              type="button"
+            >
+              Register
+            </button>
+          </div>
+
+          <form className="auth-form" onSubmit={handleAuth} noValidate>
+            {formState === 1 && (
+              <div className="form-field">
+                <label htmlFor="fullname">Full name</label>
+                <input
+                  id="fullname"
+                  type="text"
+                  placeholder="Arjun Sharma"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  autoFocus
+                />
+              </div>
+            )}
+
+            <div className="form-field">
+              <label htmlFor="username">Username</label>
+              <input
+                id="username"
+                type="text"
+                placeholder="arjun_sharma"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                autoFocus={formState === 0}
+              />
             </div>
 
-            <Box component="form" noValidate sx={{ mt: 1 }}>
-              {formState === 1 ? (
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="username"
-                  label="Full Name"
-                  name="username"
-                  value={name}
-                  autoFocus
-                  onChange={(e) => setName(e.target.value)}
-                />
-              ) : (
-                <></>
-              )}
-
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="username"
-                label="Username"
-                name="username"
-                value={username}
-                autoFocus
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                value={password}
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
+            <div className="form-field">
+              <label htmlFor="password">Password</label>
+              <input
                 id="password"
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
+            </div>
 
-              <p style={{ color: "red" }}>{error}</p>
+            {error && <div className="auth-error">{error}</div>}
+            {successMsg && <div className="auth-success">{successMsg}</div>}
 
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                onClick={handleAuth}
-              >
-                {formState === 0 ? "Login " : "register"}
-              </Button>
-            </Box>
-          </Box>
-        </Grid>
-      </Grid>
+            <button
+              type="submit"
+              className="auth-submit"
+              disabled={loading}
+            >
+              {loading
+                ? "Please wait…"
+                : formState === 0
+                ? "Sign in →"
+                : "Create account →"}
+            </button>
+          </form>
 
-      <Snackbar open={open} autoHideDuration={4000} message={message} />
-    </ThemeProvider>
+          <p className="auth-switch">
+            {formState === 0 ? (
+              <>
+                Don't have an account?{" "}
+                <button onClick={() => switchTab(1)} type="button">Register here</button>
+              </>
+            ) : (
+              <>
+                Already have an account?{" "}
+                <button onClick={() => switchTab(0)} type="button">Sign in</button>
+              </>
+            )}
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
