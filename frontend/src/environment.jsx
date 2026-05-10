@@ -1,7 +1,6 @@
-// Set IS_PROD to true and update the URL below when deploying
-const IS_PROD = false;
+const IS_PROD = true;
 const server = IS_PROD
-  ? "https://your-backend-url.com"
+  ? "https://your-backend-https://your-render-backend-url.onrender.com."
   : "http://localhost:8000";
 
 export default server;
