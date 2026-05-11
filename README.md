@@ -253,7 +253,7 @@ Every contribution — big or small — helps make Talksy better for everyone.
 
 <div align="center">
 
-🚀 Built with React • WebRTC • Socket.IO • Node.js • MongoDB
+#### 🚀 Built with React • WebRTC • Socket.IO • Node.js • MongoDB
 
 ### ⭐ Support - If you like this project: ⭐ Star the repository 🍴 Fork it
 
