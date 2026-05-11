@@ -238,16 +238,6 @@ This project was built to:
 - Explore peer-to-peer media streaming
 - Practice authentication and database handling
 
-### ⭐ Support - If you like this project: ⭐ Star the repository 🍴 Fork it
-
-Your support motivates me to build more projects 🚀
-
-🤝 Contributions
-
-Contributions, suggestions, and improvements are always welcome.
-
-Feel free to fork the repository and create a pull request.
-
 # 🤝 Contributions
 
 Contributions, ideas, and improvements are always welcome 🚀
@@ -262,6 +252,9 @@ If you'd like to improve Talksy, feel free to:
 Every contribution — big or small — helps make Talksy better for everyone.
 
 <div align="center">
+
 🚀 Built with React • WebRTC • Socket.IO • Node.js • MongoDB
-</div> ```
-````
+
+### ⭐ Support - If you like this project: ⭐ Star the repository 🍴 Fork it
+
+</div>
