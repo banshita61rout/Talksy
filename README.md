@@ -253,8 +253,10 @@ Every contribution — big or small — helps make Talksy better for everyone.
 
 <div align="center">
 
-#### 🚀 Built with React • WebRTC • Socket.IO • Node.js • MongoDB
+### If you found Talksy useful, give it a ⭐ — it means a lot!
 
-### ⭐ Support - If you like this project: ⭐ Star the repository 🍴 Fork it
+[![Star](https://img.shields.io/github/stars/banshita61rout/Talksy?style=social)](https://github.com/banshita61rout/Talksy/stargazers)
+&nbsp;&nbsp;
+[![Fork](https://img.shields.io/github/forks/banshita61rout/Talksy?style=social)](https://github.com/banshita61rout/Talksy/network/members)
 
 </div>
