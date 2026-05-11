@@ -47,7 +47,7 @@ The platform is designed to provide a smooth and modern meeting experience direc
 
 ## 🔗 Frontend
 
-https://talksy-frontend.netlify.app - to test Website to directly to this link
+https://talksy-frontend.netlify.app - to test Website go directly to this link
 
 ## 🔗 Backend
 
@@ -191,6 +191,7 @@ User → React Frontend → Socket.IO Signaling → WebRTC Connection → Peer-t
 
 ### 🧩 Project Architecture
 
+```
 📂 Frontend
 frontend/
 ├── src/
@@ -208,6 +209,7 @@ Backend/
 │ ├── middleware/
 │ └── app.js
 ⚙️ Environment Variables
+```
 
 ### Backend .env
 
