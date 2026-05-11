@@ -108,8 +108,9 @@ npm run dev
 
 ```
 
-Frontend runs on:
+### Frontend runs on:
 
+```
 http://localhost:5173
 
 ```
@@ -215,7 +216,7 @@ Backend/
 PORT=8000
 MONGO_URI=your_mongodb_connection_string
 
-````
+```
 
 ### 🚀 Deployment
 
