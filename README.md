@@ -69,31 +69,45 @@ https://talksy-ytg9.onrender.com
 
 ```bash
 git clone https://github.com/banshita61rout/Talksy.git
-📁 2. Navigate To Project Folder
 ```
 
+# 📁 2. Navigate To Project Folder
+
+```
 cd Talksy
-📦 3. Setup Backend
+
+```
+
+# 📦 3. Setup Backend
+
+```
 cd Backend
 npm install
+```
+
+### Create a .env file:
 
 ```
-Create a .env file:
-
 PORT=8000
 MONGO_URI=your_mongodb_connection_string
-
-Run backend:
-
-npm run dev
-💻 4. Setup Frontend
 ```
 
+#### Run backend:
+
+```
+npm run dev
+
+```
+
+# 💻 4. Setup Frontend
+
+```
 cd ../frontend
 npm install
 npm run dev
 
 ```
+
 Frontend runs on:
 
 http://localhost:5173
@@ -197,9 +211,11 @@ Backend/
 ### Backend .env
 
 ```
+
 PORT=8000
 MONGO_URI=your_mongodb_connection_string
-```
+
+````
 
 ### 🚀 Deployment
 
@@ -245,3 +261,4 @@ Every contribution — big or small — helps make Talksy better for everyone.
 <div align="center">
 🚀 Built with React • WebRTC • Socket.IO • Node.js • MongoDB
 </div> ```
+````
